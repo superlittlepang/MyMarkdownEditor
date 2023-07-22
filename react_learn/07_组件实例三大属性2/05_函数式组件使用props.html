@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>props</title>
+  </head>
+  <body>
+    <div id="test"></div>
+    <!--引入react核心库-->
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <!--引入react-dom,用于支持react操作DOM-->
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+    <!--引入babel,用于将jsx转化为js-->
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+    <!--引入prop-types，用于对组件标签属性进行限制-->
+    <script type="text/javascript" src="../js/prop-types.js"></script>
+
+    <script type="text/babel">
+      //创建组件
+
+
+      function Person(props){
+        const {name,sex,age} = props
+        return (
+                <ul>
+                    <li>姓名:{name}</li>
+                    <li>性别:{sex}</li>
+                    <li>年龄:{age}</li>    
+                </ul>
+            )
+      }
+
+      //可以为Person加限制
+
+      //渲染组件到页面
+      ReactDOM.render(<Person name='tom' age = "19"/>,document.getElementById('test'))
+      
+    </script>
+  </body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>props</title>
+  </head>
+  <body>
+    <div id="test1"></div>
+    <div id="test2"></div>
+    <!--引入react核心库-->
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <!--引入react-dom,用于支持react操作DOM-->
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+    <!--引入babel,用于将jsx转化为js-->
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+    <!--引入prop-types，用于对组件标签属性进行限制-->
+    <script type="text/javascript" src="../js/prop-types.js"></script>
+
+    <script type="text/babel">
+      //创建组件
+      class Person extends React.Component{
+        render(){
+            const {name,age,sex} = this.props
+            //props是只读的
+            //this.props.name='jack'  报错
+            return (
+                <ul>
+                    <li>姓名:{name}</li>
+                    <li>性别:{sex}</li>
+                    <li>年龄:{age}</li>    
+                </ul>
+            )
+        }
+      }
+      //使用propTypes添加限制条件
+      Person.propTypes = {
+        name:PropTypes.string.isrequired, //限制必传，且为字符串
+        sex:PropTypes.string,//限制为字符串
+        age:PropTypes.number,//限制为数值
+        speak:PropTypes.func,//限制为函数
+      }
+      //设置默认值
+      Person.defaultProptypes = {
+        sex : '男',//限制默认性别为男
+        age:18,//限制默认年龄为18
+      }
+      //渲染组件到页面
+      ReactDOM.render(<Person name='tom' age={19} sex="女" speak={speak}/>,document.getElementById('test1'))
+      
+      const p = {name:'老刘',age:18,sex:'woman'}
+      //ReactDOM.render(<Person name={p.name} age={p.age} sex={p.sex}/>,document.getElementById("test2"))
+      ReactDOM.render(<Person {...p}/>,document.getElementById("test2"))
+
+      function speak(){
+        console.log("hello!!")
+      }
+
+
+    </script>
+  </body>
+</html>
